@@ -1,1 +1,2 @@
-SIVA is a voice based assistant project.
+SIVA is a voice based assistant project started in 2019 however only recently uploaded to GitHub for public contribution.
+The hopes for this project right now is to significantly improve the back end processing of voice inputs.
