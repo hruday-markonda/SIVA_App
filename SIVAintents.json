@@ -1,0 +1,45 @@
+{"SivaSpeechDictionary": [
+        {"ProbableInput": "Hello",
+         "PotentialOutputs": ["Hello!", "Good to see you!", "Hi there! How can I help?", "Good _TimeOfDay_"]
+        },
+        {"ProbableInput": "Bye",
+         "PotentialOutputs": ["Talk to you later.", "Goodbye!", "Have a nice day.", "Glad I could help!"]
+        },
+        {"ProbableInput":"Search-NoQuery",
+         "PotentialOutputs":["Sure, what would you like for me to search?", "Can you tell me what to search for?", "Yes sure, what would it be?"]
+        },
+        {"ProbableInput":"Weather",
+         "PotentialOutputs":["Ok I'm showing the weather.","Showing the weather.", "This is how the weather is."]
+        },
+        {"ProbableInput": "Joke",
+         "PotentialOutputs": ["Why did the chicken cross the road? To get to the other side.", "Why did the chicken cross the road? I don't know why."]
+        },
+        {"ProbableInput": "Define",
+         "PotentialOutputs": ["The definition of _UserRequest_ is: _WordDef_.", "_UserRequest_ means: _WordDef_."]
+        },
+        {"ProbableInput": "Feeling",
+         "PotentialOutputs": ["I am good thanks.", "I am doing great!", "Happy to be at your service!"]
+        },
+        {"ProbableInput": "Error",
+         "PotentialOutputs": ["Sorry, I am currently not capable of doing what you have asked.", "Can you ask a different question?", "I did not quite get what you mean."]
+        },
+        {"ProbableInput": "Help",
+         "PotentialOutputs": ["You can try asking me to do something. For example, you can ask me to play a certain song, Google something, tell the weather and much more!"]
+        },
+        {"ProbableInput": "Time",
+         "PotentialOutputs": ["The time is - __CLOCK__"]
+        },
+        {"ProbableInput": "Date",
+         "PotentialOutputs": ["Today is __DAY__ "]
+        },
+        {"ProbableInput": "GoodResponse",
+         "PotentialOutputs": ["That is good to hear!", "I am glad you are doing well."]
+        },
+        {"ProbableInput": "YourWelcome",
+         "PotentialOutputs": ["Happy I could help!", "No problems!", "You are welcome. Anything else?"]
+        },
+        {"ProbableInput": "Name",
+         "PotentialOutputs": ["My name is SIVA. Your personal voice assistant!"]
+        }
+   ]
+}

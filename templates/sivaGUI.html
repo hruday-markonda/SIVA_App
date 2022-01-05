@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SIVA</title>
+
+    <!-- This section of the HTML deals with loading my Javascript, JQuery and CSS files using Flask URLs. --->
+    <script src="static/js/jquery-3.5.1.min.js" defer></script>
+    <script src="static/js/sivaGUI.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="static/css/sivaGUI.css">
+    <!----->
+
+    <!-- This script is not typical Javascript but rather JQuery. This JQuery 'posts' a HTTP request to my python
+    server to actually start the program, where the program processes and sends a JSON string back via HTTP protocol,
+    which is then passed to my Javascript to change the HTML. After this it will send tiny get requests to the server
+    which speaks SIVA's response and resets my JSON API for the next task. -->
+    <script type="text/javascript">
+    function OnClick(Myurl){
+        $.ajax({
+           url: Myurl,
+           type: 'POST',
+           dataType: 'json',
+           success: function(response){
+               ChangeHTML(JSON.stringify(response))
+               document.getElementById("FinishSound").play();
+               $.get('/SaySpeech/',function(){});
+               setTimeout(function(){$.get('/resetJSON/')}, 5400);
+               }
+            });
+        }
+    </script>
+    <!----->
+
+    <!-- This script is what runs when the program is open. Basically on open it resets my JSON API so that the previous
+    session's tasks wont run and then shows a greeting message upon open by sending a message in JSON format with the
+    SIVATEXT key being populated with the greeting message. -->
+    <script type="text/javascript">
+        function StartupGreeting(){
+            setTimeout(function() {
+                $("#loader-wrapper").fadeOut("slow");
+                $.get('/resetJSON/', function () {
+                    OnClick('/Greetings/');
+                });
+                $("#microphone,#microphonebackground,#textbox").hide().fadeIn(1500);
+            },5000)
+        }
+        window.onload = StartupGreeting;
+    </script>
+    <!----->
+
+</head>
+<body>
+
+<!-- This is my loading screen, the loading screen is added to ensure when my HTML elements fade in it looks cleaner. -->
+<div id="loader-wrapper">
+    <div id="Loader"><strong>Launching SIVA...</strong></div>
+</div>
+<!----->
+
+<!-- These audio cues play where the OnclickSound plays when the program starts and FinishSound plays when the program
+finishes processing the command. When these audio cues play is controlled by my Javascript and the JQuery up top.-->
+<audio id="OnclickSound"><source src="static/MP3/OnclickSound.mp3" type="audio/mpeg"></audio>
+<audio id="FinishSound"><source src="static/MP3/FinishProcessSound.mp3" type="audio/mpeg"></audio>
+<!----->
+
+<!-- This is the Webframe element which houses the google iFrame, regardless of whether it has a given source or not upon
+open, it only appears when requested to be open, otherwise it is hidden. -->
+<div id="Webframe">
+    <iframe id="Iframe" src="" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<!----->
+
+<!-- This is the WeatherBox element which houses a div where it shows the temperature and a visual depiction of the
+weather. Similar to the Webframe, regardless of whether it has a picture or temperature value, it only appears when
+asked. -->
+<div id="WeatherBox">
+    <img alt="Weather_Picture" id="WeatherPic" src="">
+    <h5 id="WeatherDesc"></h5>
+    <h5 id="WeatherTemp"></h5>
+</div>
+<!----->
+
+<!-- This is arguably the main section of my interface. It is a conversation log where the  logs are controlled by my
+Javascript file by adding new div tag elements hence it only includes the title when viewing this code. -->
+<div id="textbox">
+    <div><div style="text-align:center;"><h1><u>Conversation Log</u></h1></div></div><hr style="animation:none;">
+</div>
+<!----->
+
+<!-- This button is what starts the AI when the user clicks it. It has a cool rainbow border which changes depending
+on whether it is processing the input or not. The animations of the rainbow border is pure CSS but is switched using
+Javascript. -->
+<div id = "MainButton">
+    <img alt="StartSIVA" id="microphone" onclick="ChangeButton(); resetHTML(); OnClick('/startAI/');" src="static/photos/Microphone.png">
+    <img alt="StartSIVA" id="microphonebackground" src="static/photos/MicrophoneBackground.png">
+</div>
+<!----->
+
+</body>
+</html>
