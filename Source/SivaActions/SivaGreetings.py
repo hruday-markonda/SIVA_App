@@ -1,11 +1,7 @@
-import random
-import json
-import time
-from SivaActions.SivaPopulator import Populate
-import os
+import random, json, time, os, sys
+from .SivaPopulator import Populate
 
-THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
-my_file = THIS_FOLDER + '/SIVAintents.json'
+my_file = os.path.join(sys._MEIPASS, 'SIVAintents.json')
 with open(str(my_file)) as ListOfResponses:
     SpeechDictionary = json.load(ListOfResponses)
 

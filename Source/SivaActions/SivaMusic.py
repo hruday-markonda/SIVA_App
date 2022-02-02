@@ -1,6 +1,9 @@
-import urllib.request, os, json, sys, re, requests
+import urllib.request, os, json, sys, re,requests
 from bs4 import BeautifulSoup
-from SivaActions.SivaPopulator import Populate
+from .SivaPopulator import Populate
+
+#Adapted from https://www.codeproject.com/articles/873060/python-search-youtube-for-video and
+#https://stackoverflow.com/questions/62726516/empty-list-most-of-the-time-outputted-when-trying-to-find-first-link-when-gettin
 
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
 LANGUAGE = "en-US,en;q=0.5"
@@ -8,12 +11,6 @@ CurrentHTMLSession = requests.Session()
 CurrentHTMLSession.headers['User-Agent'] = USER_AGENT
 CurrentHTMLSession.headers['Accept-Language'] = LANGUAGE
 CurrentHTMLSession.headers['Content-Language'] = LANGUAGE
-
-THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-my_file = THIS_FOLDER + '/SIVAintents.json'
-
-#Adapted from https://www.codeproject.com/articles/873060/python-search-youtube-for-video and
-#https://stackoverflow.com/questions/62726516/empty-list-most-of-the-time-outputted-when-trying-to-find-first-link-when-gettin
 
 def MusicPlayer(MusicRequest):
     #-------------------------------------------------------------------------------------------------------------------
@@ -45,13 +42,14 @@ def MusicPlayer(MusicRequest):
     youtubeurl = CurrentHTMLSession.get(str("https://www.youtube.com/watch?v=" + SearchResults[0]))
     soup = BeautifulSoup(youtubeurl.text, "html.parser")
     Title = soup.find("title").text
-    Title = Title.replace("- YouTube","")
+    Title = Title.replace("- YouTube", "")
     #-------------------------------------------------------------------------------------------------------------------
 
     #-------------------------------------------------------------------------------------------------------------------
     #The link and a response from SIVA stating what you have searched is then populated into JSON to then send to front
     #end.
     Populate(besturl, "WEBLINK", "non", "non", "non")
+    my_file = os.path.join(sys._MEIPASS, 'SIVAintents.json')
     SivaMessage = "Now playing: " + Title
     return Populate(str(SivaMessage), "SIVATEXT", "non", "non", "non")
     #-------------------------------------------------------------------------------------------------------------------

@@ -1,16 +1,15 @@
-import json
-import os
-import sys
-import threading
-import webview
+import json,os,sys,threading,webview,SivaNLI
 from flask import Flask, Response, render_template, jsonify
-
-import SivaNLI
 from SivaActions.SivaGreetings import Greetings
-
-app = Flask(__name__)
-THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '.'))
-my_file = THIS_FOLDER + '/SivaActions/PyJsVarDump.json'
+#-----------------------------------------------------------------------------------------------------------------------
+#These are variables which are needed in order for a onefile executable to work properly. sys._MEIPASS refers to a
+#cached directory which is created by the application when opened which temporarily houses data files such as JSON and
+#text files and also script files such as my python scripts which are easier to access through relative paths.
+template_folder = os.path.join(sys._MEIPASS, 'templates')
+static_folder = os.path.join(sys._MEIPASS, 'static')
+app = Flask(__name__, template_folder=template_folder, static_folder=static_folder)
+my_file = os.path.join(sys._MEIPASS, 'PyJsVarDump.json')
+#-----------------------------------------------------------------------------------------------------------------------
 
 #-----------------------------------------------------------------------------------------------------------------------
 #This is what is run when the user clicks the microphone button. It is prompted by the AJAX front end to run through the
@@ -68,7 +67,6 @@ def resetJson():
 def closeApp():
     #JSON API file is reset upon exiting to ensure it is fresh for next session.
     resetJson()
-
     #os._exit(0) ensures all processes relating SIVA are quit such as closing the localserver with host name SIVAhost
     #rather than just the interface closing. This ensures there is no background processes going on after quitting which
     #would count as a violation of privacy as the app is still technically running.
@@ -98,6 +96,6 @@ if __name__ == '__main__':
     t.daemon = True
     t.start()
     webview.create_window("SIVA","http://localhost:5000/", resizable=False, height=670, width=340)
-    webview.start(debug=True)
+    webview.start(debug=False)
     sys.exit()
 #-----------------------------------------------------------------------------------------------------------------------

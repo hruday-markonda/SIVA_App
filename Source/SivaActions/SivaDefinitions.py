@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as BeautifulSoup
-from SivaActions.SivaPopulator import Populate
-from SivaActions.SivaWeather import USER_AGENT, CurrentHTMLSession, LANGUAGE
+from .SivaPopulator import Populate
+from .SivaWeather import USER_AGENT, CurrentHTMLSession, LANGUAGE
 
 #This function opens dictionary.com with the query and then gets its definition. If the definition doesnt exist
 #then it populates an error message to display on front end
@@ -14,8 +14,5 @@ def Definer(WordToDefine):
     else:
         return Populate("The word you have asked for the meaning does not have a dictionary definition.", "SIVATEXT", "non", "non","non")
 
-
 if __name__ == '__main__':
-    '''Uncomment the dkfdsk to test output for invalid words'''
-    #Definer("dkfdsk")
-    Definer("Australia")
+    Definer("Australian")

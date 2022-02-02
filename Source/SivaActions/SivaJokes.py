@@ -1,11 +1,9 @@
-import random
-import json
-from SivaActions.SivaPopulator import Populate
-import os
+import random, json, os, sys
+from .SivaPopulator import Populate
 
+#This just gets a joke and adds the prefix to the joke
 def JokeTeller():
-    THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    my_file = THIS_FOLDER +'/SIVAintents.json'
+    my_file = os.path.join(sys._MEIPASS, 'SIVAintents.json')
     with open(my_file) as ListOfResponses:
         SpeechDictionary = json.load(ListOfResponses)
         for ProbableOutputs in SpeechDictionary['SivaSpeechDictionary']:

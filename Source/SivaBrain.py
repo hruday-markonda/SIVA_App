@@ -6,16 +6,14 @@ from SivaActions.SivaResponses import Responses
 #which require some type of search request which in that case would be a query and ones which dont require a search
 #request which would be a nonquery.
 
-QueryFunctions = ["google","search","music","define","definition","meaning","mean","search","play","youtube","song","music","song"]
+QueryFunctions = ["google","search","music","define","definition","meaning","mean","play","youtube","song","music","song"]
 NonQueryFunctions = ["weather","joke","feeling","date","day","today","time","outside","temperature","sad","unhappy","laugh"]
-THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__)))
-my_file = THIS_FOLDER + '/SIVAintents.json'
+my_file = os.path.join(sys._MEIPASS, 'SIVAintents.json')
 
 #-----------------------------------------------------------------------------------------------------------------------
 #This small piece of code simply opens the json file for use. This is seen frequently in many of my modules
 with open(str(my_file)) as ListOfResponses:
     SpeechDictionary = json.load(ListOfResponses)
-#-----------------------------------------------------------------------------------------------------------------------
 
 #-----------------------------------------------------------------------------------------------------------------------
 #This function uses the EnglishStopWords text file in order to filter out non-essential words within the given
@@ -23,12 +21,12 @@ with open(str(my_file)) as ListOfResponses:
 #the entity.
 def SivaStringProcessor(user_command):
     #-------------------------------------------------------------------------------------------------------------------
+    EngFile = os.path.join(sys._MEIPASS, 'EnglishStopWords.txt')
+    EnglishStopWords = open(str(EngFile), "r")
+    ListOfStopWords = [line.strip() for line in EnglishStopWords]
     user_command = user_command.replace("'", "")
     user_command = user_command.lower()
     user_command = user_command.split()
-    EngFile = os.path.join(THIS_FOLDER, 'EnglishStopWords.txt')
-    EnglishStopWords = open(str(EngFile), "r")
-    ListOfStopWords = [line.strip() for line in EnglishStopWords]
     #-------------------------------------------------------------------------------------------------------------------
     FilteredCommand = user_command[:]
     for word in user_command:

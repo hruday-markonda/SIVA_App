@@ -1,11 +1,8 @@
-import json
+import json, os, inflect, sys
 from datetime import datetime
-import os
-from SivaActions.SivaPopulator import Populate
-import inflect
+from . import SivaPopulator
 
-THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-my_file = THIS_FOLDER + '/SIVAintents.json'
+my_file = os.path.join(sys._MEIPASS, 'SIVAintents.json')
 with open(my_file) as ListOfResponses:
     SpeechDictionary = json.load(ListOfResponses)
 
@@ -23,7 +20,7 @@ def Date():
             DayOfMonth = Current.strftime("%d").capitalize()
             FinalDate = str(Weekday + ", " + "the " + p.ordinal(DayOfMonth) + " of " + Month + ". The year is " + Year)
             DateResponse = DateResponse.replace("__DAY__", FinalDate)
-            return Populate(str(DateResponse), "SIVATEXT", "non", "non","non")
+            return SivaPopulator.Populate(str(DateResponse), "SIVATEXT", "non", "non","non")
 
 #The time function gets the raw time and then converts it into 24 hour based time
 def Time():
@@ -33,10 +30,9 @@ def Time():
             DisplayMessage = ProbableOutputs['PotentialOutputs']
             Time = str(Current.strftime("%I:%M%p"))
             DisplayMessage = DisplayMessage.replace("__CLOCK__", Time) + "."
-            return Populate(str(DisplayMessage), "SIVATEXT", "non", "non","non")
+            return SivaPopulator.Populate(str(DisplayMessage), "SIVATEXT", "non", "non","non")
 
 
 if __name__ == '__main__':
-    '''Just uncomment respective functions to run'''
-    #Date()
+    Date()
     Time()

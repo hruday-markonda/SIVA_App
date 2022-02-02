@@ -1,4 +1,4 @@
-from SivaActions.SivaPopulator import Populate
+from .SivaPopulator import Populate
 
 #This adds the query to a google search prefix to generate the google link
 def GoogleSearch(SearchRequest):

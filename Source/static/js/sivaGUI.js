@@ -9,7 +9,7 @@ function ChangeButton(){
     document.getElementById("microphone").style.filter = "contrast(200%)";
     micback.style.backgroundImage = "linear-gradient(white,white), repeating-conic-gradient(cyan, blue, magenta, red, yellow, lime, cyan)";
     micback.style.animation = "RGB 1s linear infinite normal";
-
+    
     //the reason why the microphone background display is set to none and then block immediately is because in Safari
     //it is unable to visually update the changes to css animations for some reason
     micback.style.display ="none";
