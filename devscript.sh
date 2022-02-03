@@ -18,6 +18,17 @@ then
     cd ./Source
     pyinstaller -w -F --hidden-import=pkg_resources.py2_warn --add-data "templates:templates" --add-data "static:static" --add-data "SIVAintents.json:." --add-data "SivaActions/PyJsVarDump.json:." --add-data "EnglishStopWords.txt:." --name SIVA --icon icon.icns InitSIVA.py
 
+elif [ $1 = clear ]
+then 
+    cd ./Source
+    rm -r build
+    rm -r dist
+    rm SIVA.spec
+elif [ $1 = neat ]
+then 
+    cd ./Source
+    rm -r build
+    rm SIVA.spec
 else
 echo 'Invalid Argument'
 fi

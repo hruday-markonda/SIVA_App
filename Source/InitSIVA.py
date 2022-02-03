@@ -5,11 +5,22 @@ from SivaActions.SivaGreetings import Greetings
 #These are variables which are needed in order for a onefile executable to work properly. sys._MEIPASS refers to a
 #cached directory which is created by the application when opened which temporarily houses data files such as JSON and
 #text files and also script files such as my python scripts which are easier to access through relative paths.
+
+#Comment this block out and uncomment next block if you wish to debug the application
+
 template_folder = os.path.join(sys._MEIPASS, 'templates')
 static_folder = os.path.join(sys._MEIPASS, 'static')
 app = Flask(__name__, template_folder=template_folder, static_folder=static_folder)
 my_file = os.path.join(sys._MEIPASS, 'PyJsVarDump.json')
 #-----------------------------------------------------------------------------------------------------------------------
+
+'''
+#-----------------------------------------------------------------------------------------------------------------------
+app = Flask(__name__)
+THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '.'))
+my_file = THIS_FOLDER + '/SivaActions/PyJsVarDump.json'
+#-----------------------------------------------------------------------------------------------------------------------
+'''
 
 #-----------------------------------------------------------------------------------------------------------------------
 #This is what is run when the user clicks the microphone button. It is prompted by the AJAX front end to run through the

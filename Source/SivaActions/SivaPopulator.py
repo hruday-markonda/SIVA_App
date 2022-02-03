@@ -1,8 +1,16 @@
 import os,json,sys
 
+#One file executable json path
+my_file = os.path.join(sys._MEIPASS, 'PyJsVarDump.json')
+
+'''
+#Debugging json path
+THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname( __file__ )))
+my_file = THIS_FOLDER + '/PyJsVarDump.json'
+'''
+
 #This populates the PyJsVarDump.json file by passing the name of the key to populate and the data it should go
 def Populate(data, key, WEATHERIMAGE, TEMP, appstat):
-    my_file = os.path.join(sys._MEIPASS, 'PyJsVarDump.json')
     with open(my_file, 'r') as VarDump:
         JSONAPI = json.load(VarDump)
     JSONAPI[str(key)] = data

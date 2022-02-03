@@ -2,7 +2,13 @@ import json, os, inflect, sys
 from datetime import datetime
 from . import SivaPopulator
 
-my_file = os.path.join(sys._MEIPASS, 'SIVAintents.json')
+'''#One file executable json path
+my_file = os.path.join(sys._MEIPASS, 'SIVAintents.json')'''
+
+#Debugging json path
+THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+my_file = THIS_FOLDER + '/SIVAintents.json'
+
 with open(my_file) as ListOfResponses:
     SpeechDictionary = json.load(ListOfResponses)
 
