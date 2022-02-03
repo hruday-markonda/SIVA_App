@@ -8,7 +8,7 @@ The hopes for this project right now is to significantly improve the back end pr
 - Execute the bash script `devscript.sh` with `dependent` argument to install all required python dependencies, add to this list any new libraries being used.
 - Execute the bash script `devscript.sh` with `compile` argument while in same folder as the file to generate executable which can be found in `/Source/dist/`.
 - Execute the bash script `devscript.sh` with `clear` argument to remove all compilation files and directories including the application.
-- Execute the bash script `devscript.sh` with `neat` argument to remove all compilation files and directories leaving only the application which is inside `dist` folder.
+- Execute the bash script `devscript.sh` with `neat` argument to remove all compilation files and directories leaving only the application which is inside `/Source/dist/` folder.
 
 #### Running Debug Mode:
 
